@@ -17,6 +17,21 @@ let level = 1;
 let gameOver = false;
 let intervalId;
 
+const backgroundImage = new Image();
+backgroundImage.src = 'https://i.postimg.cc/SN2NGfGX/background.jpg';
+
+const playerImage = new Image();
+playerImage.src = 'https://i.postimg.cc/0jHjyt0v/player.png';
+
+const movingElement = new Image();
+movingElement.src = 'https://i.postimg.cc/26Q63bxF/skeleton-v2.png';
+
+const keyImage = new Image();
+keyImage.src = 'https://i.postimg.cc/MZmtR9PV/key.png';
+
+const boxImage = new Image();
+boxImage.src = 'https://i.postimg.cc/5NPX2t2J/box.png';
+
 const hud = document.getElementById('hud');
 const menu = document.getElementById('menu');
 const gameOverScreen = document.getElementById('gameOver');
@@ -65,28 +80,32 @@ function generateMaze() {
 
 function drawMaze() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     for (let row = 0; row < mazeRows; row++) {
         for (let col = 0; col < mazeCols; col++) {
             if (maze[row][col] === 1) {
-                ctx.fillStyle = '#444';
-                ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+                ctx.drawImage(boxImage, col * cellSize, row * cellSize, cellSize, cellSize);
+                // ctx.fillStyle = '#444';
+                // ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
             }
         }
     }
 
     // Draw keys
     keys.forEach(key => {
-        ctx.fillStyle = 'yellow';
-        ctx.beginPath();
-        ctx.arc(key.x * cellSize + cellSize / 2, key.y * cellSize + cellSize / 2, cellSize / 4, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.drawImage(keyImage, key.x * cellSize, key.y * cellSize, cellSize, cellSize);
+        // ctx.fillStyle = 'yellow';
+        // ctx.beginPath();
+        // ctx.arc(key.x * cellSize + cellSize / 2, key.y * cellSize + cellSize / 2, cellSize / 4, 0, Math.PI * 2);
+        // ctx.fill();
     });
 
     // Draw player
-    ctx.fillStyle = 'blue';
-    ctx.beginPath();
-    ctx.arc(player.x * cellSize + cellSize / 2, player.y * cellSize + cellSize / 2, cellSize / 2.5, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.drawImage(playerImage, player.x * cellSize, player.y * cellSize, cellSize, cellSize);
+    // ctx.fillStyle = 'blue';
+    // ctx.beginPath();
+    // ctx.arc(player.x * cellSize + cellSize / 2, player.y * cellSize + cellSize / 2, cellSize / 2.5, 0, Math.PI * 2);
+    // ctx.fill();
 
     // Draw exit
     // ctx.fillStyle = 'green';
@@ -102,10 +121,11 @@ function drawMaze() {
 
     // Draw moving elements
     movingElements.forEach(me => {
-        ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.arc(me.x * cellSize + cellSize / 2, me.y * cellSize + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
-        ctx.fill();
+        // ctx.fillStyle = 'red';
+        // ctx.beginPath();
+        // ctx.arc(me.x * cellSize + cellSize / 2, me.y * cellSize + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
+        // ctx.fill();
+        ctx.drawImage(movingElement, me.x * cellSize, me.y * cellSize, cellSize, cellSize);
     });
 }
 

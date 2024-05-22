@@ -28,6 +28,12 @@ canvas {
     z-index: 1;
     display: none; /* Initially hidden */
 }
+.btn{
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #81c12e;
+    font-weight: bold;
+}
 
 .overlay {
     position: absolute;
@@ -42,6 +48,10 @@ canvas {
     flex-direction: column;
     color: white;
     z-index: 2;
+    background-image: url('https://i.postimg.cc/KzqPqHdH/menu-background.jpg');
+    background-size: cover;
+    background-position: bottom;
+    background-blend-mode: color;
 }
 
 #menu, #gameOver {
