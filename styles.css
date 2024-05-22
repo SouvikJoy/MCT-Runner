@@ -29,10 +29,14 @@ canvas {
     display: none; /* Initially hidden */
 }
 .btn{
-    padding: 10px 20px;
-    border-radius: 10px;
-    background: #81c12e;
+    padding: 14px 30px;
+    border-radius: 20px;
+    background: #951524;
     font-weight: bold;
+    color: white;
+    outline: none;
+    font-size: 20px;
+    border: none;
 }
 
 .overlay {
@@ -48,10 +52,28 @@ canvas {
     flex-direction: column;
     color: white;
     z-index: 2;
-    background-image: url('https://i.postimg.cc/KzqPqHdH/menu-background.jpg');
+    background-image: url('https://i.postimg.cc/W4yLfQ80/MCT-RUNNER.jpg');
     background-size: cover;
     background-position: bottom;
-    background-blend-mode: color;
+    /* background-blend-mode: color; */
+}
+.overlay_gameover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    z-index: 2;
+    background-image: url('https://i.postimg.cc/y69LLVfq/MCT-RUNNER-g-AME-OVER.jpg');
+    background-size: cover;
+    background-position: bottom;
+    /* background-blend-mode: color; */
 }
 
 #menu, #gameOver {
@@ -60,4 +82,19 @@ canvas {
 
 #menu h1, #gameOver h1 {
     margin-bottom: 20px;
+}
+
+.gameover_text{
+    color: #951524;
+}
+
+.res_btn{
+    padding: 14px 30px;
+    border-radius: 20px;
+    background: #177904;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    font-size: 20px;
+    border: none;
 }
