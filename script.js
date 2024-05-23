@@ -38,9 +38,9 @@ lockedImage.src = 'https://i.postimg.cc/d3MstFXC/locked.jpg';
 const unlockedImage = new Image();
 unlockedImage.src = 'https://i.postimg.cc/1zn1gTDr/unlocked.jpg';
 
-const keySound = new Audio('dummy_url_for_key_sound.mp3');
-const levelSound = new Audio('dummy_url_for_level_sound.mp3');
-const gameTeleportSound = new Audio('dummy_url_for_teleport_sound.mp3');
+const keySound = new Audio('keysound.mp3');
+const levelSound = new Audio('level_up.mp3');
+const gameTeleportSound = new Audio('game_teleport.mp3');
 
 const hud = document.getElementById('hud');
 const menu = document.getElementById('menu');
