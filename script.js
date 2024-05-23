@@ -32,6 +32,12 @@ keyImage.src = 'https://i.postimg.cc/MZmtR9PV/key.png';
 const boxImage = new Image();
 boxImage.src = 'https://i.postimg.cc/5NPX2t2J/box.png';
 
+const lockedImage = new Image();
+lockedImage.src = 'https://i.postimg.cc/d3MstFXC/locked.jpg';
+
+const unlockedImage = new Image();
+unlockedImage.src = 'https://i.postimg.cc/1zn1gTDr/unlocked.jpg';
+
 const hud = document.getElementById('hud');
 const menu = document.getElementById('menu');
 const gameOverScreen = document.getElementById('gameOver');
@@ -112,11 +118,13 @@ function drawMaze() {
     // ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
 
 	if(keys.length === 0) {
-		ctx.fillStyle = 'green';
-    	ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
+		// ctx.fillStyle = 'green';
+    	// ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
+        ctx.drawImage(unlockedImage, exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
 	} else {
-		ctx.fillStyle = 'orange';
-    	ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
+		// ctx.fillStyle = 'orange';
+    	// ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
+        ctx.drawImage(lockedImage, exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
 	}
 
     // Draw moving elements
