@@ -38,6 +38,12 @@ lockedImage.src = 'https://i.postimg.cc/d3MstFXC/locked.jpg';
 const unlockedImage = new Image();
 unlockedImage.src = 'https://i.postimg.cc/1zn1gTDr/unlocked.jpg';
 
+const keySound = new Audio('keysound.mp3');
+
+const levelSound = new Audio('level_up.mp3');
+
+const gameTeleportSound = new Audio('game_teleport.mp3');
+
 const hud = document.getElementById('hud');
 const menu = document.getElementById('menu');
 const gameOverScreen = document.getElementById('gameOver');
@@ -151,6 +157,7 @@ function movePlayer(dx, dy) {
         keys = keys.filter(key => {
             if (key.x === player.x && key.y === player.y) {
                 score += 5;
+                keySound.play();
                 updateHUD();
                 return false;
             }
@@ -168,6 +175,7 @@ function movePlayer(dx, dy) {
         // Check if player reached the exit
         if (player.x === exit.x && player.y === exit.y && keys.length === 0) {
             level++;
+            levelSound.play();
             updateHUD();
             generateMaze();
             player = { x: 0, y: 0 };
@@ -192,6 +200,7 @@ function moveElements() {
 
         if (me.x === player.x && me.y === player.y) {
             endGame();
+            pla
         }
     });
 
@@ -200,6 +209,7 @@ function moveElements() {
 
 function endGame() {
     gameOver = true;
+    gameTeleportSound.play();
     clearInterval(intervalId);
     gameOverScreen.style.display = 'flex';
 }
