@@ -38,11 +38,9 @@ lockedImage.src = 'https://i.postimg.cc/d3MstFXC/locked.jpg';
 const unlockedImage = new Image();
 unlockedImage.src = 'https://i.postimg.cc/1zn1gTDr/unlocked.jpg';
 
-const keySound = new Audio('keysound.mp3');
-
-const levelSound = new Audio('level_up.mp3');
-
-const gameTeleportSound = new Audio('game_teleport.mp3');
+const keySound = new Audio('dummy_url_for_key_sound.mp3');
+const levelSound = new Audio('dummy_url_for_level_sound.mp3');
+const gameTeleportSound = new Audio('dummy_url_for_teleport_sound.mp3');
 
 const hud = document.getElementById('hud');
 const menu = document.getElementById('menu');
@@ -58,13 +56,23 @@ function updateHUD() {
 function generateMaze() {
     maze = Array.from({ length: mazeRows }, () => Array(mazeCols).fill(0));
 
-    // Simple maze generation with random walls
+    // Place walls randomly, but keep them sparse
     for (let row = 0; row < mazeRows; row++) {
         for (let col = 0; col < mazeCols; col++) {
-            if (Math.random() < 0.2 && !(row === 0 && col === 0) && !(row === mazeRows - 1 && col === mazeCols - 1)) {
+            if (Math.random() < 0.1 && !(row === 0 && col === 0) && !(row === mazeRows - 1 && col === mazeCols - 1)) {
                 maze[row][col] = 1; // Wall
             }
         }
+    }
+
+    // Ensure a clear path from the start to the exit
+    for (let row = 0; row < mazeRows; row++) {
+        maze[row][0] = 0; // Clear the left column
+        maze[row][mazeCols - 1] = 0; // Clear the right column
+    }
+    for (let col = 0; col < mazeCols; col++) {
+        maze[0][col] = 0; // Clear the top row
+        maze[mazeRows - 1][col] = 0; // Clear the bottom row
     }
 
     // Generate keys at random positions
@@ -97,8 +105,6 @@ function drawMaze() {
         for (let col = 0; col < mazeCols; col++) {
             if (maze[row][col] === 1) {
                 ctx.drawImage(boxImage, col * cellSize, row * cellSize, cellSize, cellSize);
-                // ctx.fillStyle = '#444';
-                // ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
             }
         }
     }
@@ -106,39 +112,20 @@ function drawMaze() {
     // Draw keys
     keys.forEach(key => {
         ctx.drawImage(keyImage, key.x * cellSize, key.y * cellSize, cellSize, cellSize);
-        // ctx.fillStyle = 'yellow';
-        // ctx.beginPath();
-        // ctx.arc(key.x * cellSize + cellSize / 2, key.y * cellSize + cellSize / 2, cellSize / 4, 0, Math.PI * 2);
-        // ctx.fill();
     });
 
     // Draw player
     ctx.drawImage(playerImage, player.x * cellSize, player.y * cellSize, cellSize, cellSize);
-    // ctx.fillStyle = 'blue';
-    // ctx.beginPath();
-    // ctx.arc(player.x * cellSize + cellSize / 2, player.y * cellSize + cellSize / 2, cellSize / 2.5, 0, Math.PI * 2);
-    // ctx.fill();
 
     // Draw exit
-    // ctx.fillStyle = 'green';
-    // ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
-
-	if(keys.length === 0) {
-		// ctx.fillStyle = 'green';
-    	// ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
+    if (keys.length === 0) {
         ctx.drawImage(unlockedImage, exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
-	} else {
-		// ctx.fillStyle = 'orange';
-    	// ctx.fillRect(exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
+    } else {
         ctx.drawImage(lockedImage, exit.x * cellSize, exit.y * cellSize, cellSize, cellSize);
-	}
+    }
 
     // Draw moving elements
     movingElements.forEach(me => {
-        // ctx.fillStyle = 'red';
-        // ctx.beginPath();
-        // ctx.arc(me.x * cellSize + cellSize / 2, me.y * cellSize + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
-        // ctx.fill();
         ctx.drawImage(movingElement, me.x * cellSize, me.y * cellSize, cellSize, cellSize);
     });
 }
@@ -200,7 +187,6 @@ function moveElements() {
 
         if (me.x === player.x && me.y === player.y) {
             endGame();
-            pla
         }
     });
 
